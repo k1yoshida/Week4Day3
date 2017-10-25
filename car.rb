@@ -1,7 +1,7 @@
 class Vehicle
 end
 
-class Car
+class Car < Vehicle
 
   def initialize
     @num_wheels = 4

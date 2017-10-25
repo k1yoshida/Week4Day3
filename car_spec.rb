@@ -91,8 +91,9 @@ describe "Toyota" do
   it "can accelerate and brake" do
     my_toyota = Toyota.new
     expect(my_toyota.speed).to be_a(Numeric)
-    expect(my_toyota.accelerate).to be > 0
-    expect(my_toyota.brake).to be >= 0
+    expect(my_toyota.speed).to be 0
+    expect{my_toyota.accelerate}.to change{my_toyota.speed}.by 7
+    expect{my_toyota.brake}.to change{my_toyota.speed}.by -5
   end
 end
 
@@ -121,8 +122,9 @@ describe "Tata" do
   it "can accelerate and brake" do
     my_tata = Tata.new
     expect(my_tata.speed).to be_a(Numeric)
-    expect(my_tata.accelerate).to be > 0
-    expect(my_tata.brake).to be >= 0
+    expect(my_tata.speed).to be 0
+    expect{my_tata.accelerate}.to change{my_tata.speed}.by 2
+    expect{my_tata.brake}.to change{my_tata.speed}.by -1.25
   end
 end
 
@@ -151,11 +153,24 @@ describe "Tesla" do
   it "can accelerate and brake" do
     my_tesla = Tesla.new
     expect(my_tesla.speed).to be_a(Numeric)
-    expect(my_tesla.accelerate).to be > 0
-    expect(my_tesla.brake).to be >= 0
+    expect(my_tesla.speed).to be 0
+    expect{my_tesla.accelerate}.to change{my_tesla.speed}.by 10
+    expect{my_tesla.brake}.to change{my_tesla.speed}.by -7
+    # expect(my_tesla.brake).to be >= 0
+  end
+  it "can retrieve information about the car" do
+    my_tesla = Tesla.new
+    expect(my_tesla).to be_an_instance_of(Tesla)
+  end
+  it "can retrieve all information about my_tesla" do
+    my_tesla = Tesla.new
+    expect(my_tesla.class.to_s).to eq "Tesla"
+    expect(my_tesla.class.superclass.to_s).to eq "Car"
+    expect(my_tesla.class.superclass.superclass.to_s).to eq "Vehicle"
+    tesla_garage = [my_tesla]
+    expect(tesla_garage.to_s).to include("2015")
   end
 end
-
 # Story: As a programmer, I can honk the horn of Tesla - "Beep-bee-bee-boop-bee-doo-weep".
 
   ########See Above
@@ -209,9 +224,7 @@ end
 # Story: As a programmer, I can call upon a car to tell me all it's information.
 # Hint: Implement to_s on one or more classes. You can call a super class's to_s with super.
 
-
-
-
+#########See above
 
 
 # Story: As a programmer, I can store and retrieve all of my cars from a garage.
